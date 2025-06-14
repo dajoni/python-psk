@@ -6,8 +6,8 @@ This is a simple REST server that uses TLS 1.2 with Pre-Shared Key (PSK) authent
 
 - Python 3.13+
 - Flask
+- pex
 
-- pex 
 Install the requirements using:
 ```bash
 pip install -r requirements.txt
