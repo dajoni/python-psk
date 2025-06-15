@@ -40,7 +40,7 @@ python client.py
 - `GET /hello`: Returns a simple "Hello, World!" message in JSON format. 
 
 # Distribution
-Install pex and do
+
 ```bash
 pex $(pip freeze) --scie eager --scie-only --exe server.py -o my_test.pex
 ```
