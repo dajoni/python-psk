@@ -1,6 +1,7 @@
 import requests
 import ssl
 import urllib3
+import sys
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
@@ -69,6 +70,8 @@ def main():
     # Test both server endpoints
     endpoints = ['/', '/hello']
     
+    connection_failed = False
+    
     for endpoint in endpoints:
         url = f"{base_url}{endpoint}"
         try:
@@ -76,9 +79,34 @@ def main():
             response = session.get(url)
             print(f"Response: {response.json()}")
             print("-" * 50)
-        except requests.exceptions.RequestException as e:
-            print(f"Error for {url}: {e}")
+        except requests.exceptions.ConnectionError as e:
+            print(f"Connection error for {url}: {e}")
             print("-" * 50)
+            connection_failed = True
+        except requests.exceptions.SSLError as e:
+            print(f"SSL error for {url}: {e}")
+            print("-" * 50)
+            connection_failed = True
+        except requests.exceptions.Timeout as e:
+            print(f"Timeout error for {url}: {e}")
+            print("-" * 50)
+            connection_failed = True
+        except requests.exceptions.RequestException as e:
+            print(f"Request error for {url}: {e}")
+            print("-" * 50)
+            connection_failed = True
+        except Exception as e:
+            print(f"Unexpected error for {url}: {e}")
+            print("-" * 50)
+            connection_failed = True
+    
+    # Return appropriate exit code
+    if connection_failed:
+        print("Connection failed - exiting with error code 1")
+        return 1
+    else:
+        print("All connections successful")
+        return 0
 
 if __name__ == '__main__':
-    main() 
+    sys.exit(main()) 
