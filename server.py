@@ -46,5 +46,4 @@ if __name__ == '__main__':
     # print("Server running on https://localhost:5000") 
     
     # Run Flask app with SSL context
-    app.run(ssl_context=ssl_context, debug=True) 
-    # app.run() 
+    app.run(ssl_context=ssl_context, debug=False) 
