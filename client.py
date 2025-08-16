@@ -63,12 +63,22 @@ def main():
     # Configure the session to use our SSL context
     session.mount('https://', adapter)
     
-    # Make request to the server
-    try:
-        response = session.get('https://127.0.0.1:5000/hello')
-        print(f"Response: {response.json()}")
-    except requests.exceptions.RequestException as e:
-        print(f"Error: {e}")
+    # Server configuration
+    base_url = 'https://127.0.0.1:5000'
+    
+    # Test both server endpoints
+    endpoints = ['/', '/hello']
+    
+    for endpoint in endpoints:
+        url = f"{base_url}{endpoint}"
+        try:
+            print(f"Testing endpoint: {url}")
+            response = session.get(url)
+            print(f"Response: {response.json()}")
+            print("-" * 50)
+        except requests.exceptions.RequestException as e:
+            print(f"Error for {url}: {e}")
+            print("-" * 50)
 
 if __name__ == '__main__':
     main() 
