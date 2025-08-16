@@ -34,17 +34,16 @@ def psk_callback(identity):
     
 
 def create_ssl_context():
-    """Create SSL context with TLS 1.2 and PSK"""
+    """Create SSL context with TLS 1.3 and PSK"""
     context = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
     context.check_hostname = False
     context.verify_mode = ssl.CERT_NONE
-    context.maximum_version = ssl.TLSVersion.TLSv1_2
+    context.maximum_version = ssl.TLSVersion.TLSv1_3
     
     # Enable PSK
     context.set_psk_client_callback(psk_callback)
     
-    # Set cipher suites that support PSK
-    context.set_ciphers('PSK')
+    # TLS 1.3 handles PSK ciphers automatically, no need to set specific ciphers
     
     
     return context
