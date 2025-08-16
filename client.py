@@ -6,7 +6,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # PSK configuration (must match server)
 PSK_IDENTITY = "client1"
-PSK_KEY = bytes.fromhex('c0ffee')
+PSK_KEY = bytes.fromhex('b0ffee')
 
 class SSLContextAdapter(requests.adapters.HTTPAdapter):
     """Transport adapter that uses a custom SSL context."""
