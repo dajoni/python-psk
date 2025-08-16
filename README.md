@@ -6,7 +6,6 @@ This is a simple REST server that uses TLS 1.3 with Pre-Shared Key (PSK) authent
 
 - Python 3.13+
 - Flask
-- pex
 
 Install the requirements using:
 ```bash
@@ -73,8 +72,3 @@ strings psk_capture.pcap | grep -i hello
 
 The PSK identity `client1` should be visible in the handshake, but application data (like "Hello, World!") should be encrypted and not visible.
 
-# Distribution
-
-```bash
-pex $(pip freeze) --scie eager --scie-only --exe server.py -o my_test.pex
-```
